@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,12 @@ public class Signup extends AppCompatActivity {
                                 Email.setText("");
                                 Password.setText("");
                                 Toast.makeText(Signup.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
+                                SharedPreferences preferences_email = getSharedPreferences("user_credentials", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences_email.edit();
+                                editor.putString("username",name );
+                                editor.putString("email",email );
+                                editor.putString("pswd",pswd );
+                                editor.apply();
 
 
                                 Intent i1 = new Intent(getApplicationContext(), Login_Main.class);

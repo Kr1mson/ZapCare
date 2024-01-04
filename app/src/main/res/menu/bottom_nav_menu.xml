@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Tips"
+        android:title="Tips"
+        android:icon="@drawable/tips"/>
+    <item
+        android:id="@+id/Map"
+        android:title="Map"
+        android:icon="@drawable/map"/>
+    <item
+        android:id="@+id/Tracker"
+        android:title="Home"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/Appointment"
+        android:title="Appointment"
+        android:icon="@drawable/appointment"/>
+    <item
+        android:id="@+id/Reports"
+        android:title="Reports"
+        android:icon="@drawable/report"/>
+
+
+</menu>
