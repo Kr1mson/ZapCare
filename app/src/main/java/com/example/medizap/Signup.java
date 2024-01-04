@@ -54,6 +54,8 @@ public class Signup extends AppCompatActivity {
                                 Email.setText("");
                                 Password.setText("");
                                 Toast.makeText(Signup.this,"User Registered Successfully",Toast.LENGTH_SHORT).show();
+
+
                                 Intent i1 = new Intent(getApplicationContext(), Login_Main.class);
                                 startActivity(i1);
                                 finish();
