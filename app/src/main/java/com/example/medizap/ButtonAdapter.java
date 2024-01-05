@@ -68,7 +68,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
         if (selectedItem == position) {
             holder.button.setBackgroundColor(Color.parseColor("#967BB6")); // Set your desired color
         } else {
-            holder.button.setBackgroundColor(Color.parseColor("#AA98A9")); // Set your default color
+            holder.button.setBackgroundColor(Color.parseColor("#CBC3E3")); // Set your default color
         }
     }
 

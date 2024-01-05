@@ -6,20 +6,49 @@
     tools:context=".Appointment">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp">
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Appointments" />
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="book new"
-            android:id="@+id/booknew"/>
+
+            android:text="Hello,"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="User"
+            android:textSize="45dp"
+            android:textStyle="bold"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/sticker_appointment" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Appointments"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+
 
     </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/booknew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="10dp"/>
+
+
 
 
 </FrameLayout>

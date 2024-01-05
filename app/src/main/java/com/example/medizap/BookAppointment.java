@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,7 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,9 @@ public class BookAppointment extends Fragment implements ButtonAdapter.ButtonCli
     public BookAppointment(){}
     View view;
     String selectedMonth;
+    FloatingActionButton back;
     ButtonAdapter buttonAdapter;
+    private TextView pkddate;
     private List<String> buttonList = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,8 +48,17 @@ public class BookAppointment extends Fragment implements ButtonAdapter.ButtonCli
         oct=view.findViewById(R.id.Oct);
         nov=view.findViewById(R.id.Nov);
         dec=view.findViewById(R.id.Dec);
+        pkddate=view.findViewById(R.id.DatePicker);
+        back=view.findViewById(R.id.back);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.flFragment, new Appointment());
+                fr.commit();
+            }
+        });
 
 
 
@@ -137,7 +152,7 @@ public class BookAppointment extends Fragment implements ButtonAdapter.ButtonCli
 
         // Restore the color of the previously pressed button
         if (lastPressedButton != null) {
-            lastPressedButton.setBackgroundColor(Color.parseColor("#AA98A9")); // Set your default color
+            lastPressedButton.setBackgroundColor(Color.parseColor("#CBC3E3")); // Set your default color
         }
 
         // Change the color of the current pressed button
@@ -162,7 +177,10 @@ public class BookAppointment extends Fragment implements ButtonAdapter.ButtonCli
     @Override
     public void onButtonClick(String date) {
         // Handle the selected date here
-        Toast.makeText(getContext(), date + "/" + selectedMonth, Toast.LENGTH_SHORT).show();
+        if (pkddate != null) {
+            pkddate.setText("Selected Date: "+date + " " + selectedMonth);
+        }
+
     }
 
 }
