@@ -90,7 +90,9 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new About()).commit();
         }else if (itemId == R.id.nav_home) {
             getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Tracker()).commit();
-        } else if (itemId == R.id.nav_logout) {
+        }else if (itemId == R.id.nav_edtProfile) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new EditProfile()).commit();
+        }else if (itemId == R.id.nav_logout) {
             Toast.makeText(this, "Logged Out Successfuly", Toast.LENGTH_SHORT).show();
             SharedPreferences preferences = getSharedPreferences("user_credentials", MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
