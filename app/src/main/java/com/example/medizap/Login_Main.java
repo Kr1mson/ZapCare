@@ -34,6 +34,15 @@ public class Login_Main extends AppCompatActivity {
         login=findViewById(R.id.login_btn);
         Name=findViewById(R.id.nam_edtxt);
         Pswd=findViewById(R.id.pswd_edtxt);
+        SharedPreferences preferences = getSharedPreferences("user_credentials", MODE_PRIVATE);
+        String username = preferences.getString("username", null);
+        String token = preferences.getString("pswd", null);
+
+        if (username != null && token != null) {
+            Toast.makeText(Login_Main.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), Home.class);
+            startActivity(intent);
+        }
 
 
         login.setOnClickListener(new View.OnClickListener() {

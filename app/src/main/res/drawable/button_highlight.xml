@@ -1,0 +1,21 @@
+<!-- res/drawable/button_highlight.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <!-- Define the background color when the button is pressed -->
+            <solid android:color="@color/tert"/> <!-- Use your desired color -->
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <!-- You can add a different style for focused state if needed -->
+        <shape>
+            <solid android:color="@color/sec"/>
+        </shape>
+    </item>
+    <item>
+        <!-- Default state -->
+        <shape>
+            <solid android:color="@color/sec"/> <!-- Use your default color -->
+        </shape>
+    </item>
+</selector>
