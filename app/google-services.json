@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "720308214483",
+    "project_id": "medizap-a8ae7",
+    "storage_bucket": "medizap-a8ae7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720308214483:android:2af0551cf1900e13c6d226",
+        "android_client_info": {
+          "package_name": "com.example.medizap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3-oivHSXDEU1CERq2Rob4JFOCrRYKawM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
