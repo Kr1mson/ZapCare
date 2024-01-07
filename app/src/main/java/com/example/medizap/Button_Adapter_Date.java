@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonViewHolder> {
+public class Button_Adapter_Date extends RecyclerView.Adapter<Button_Adapter_Date.ButtonViewHolder> {
 
     private List<String> buttonList;
     private ButtonClickListener buttonClickListener;
@@ -21,7 +21,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonAdapter.ButtonView
     }
 
     // Constructor to set the callback
-    public ButtonAdapter(List<String> buttonList, ButtonClickListener listener) {
+    public Button_Adapter_Date(List<String> buttonList, ButtonClickListener listener) {
         this.buttonList = buttonList;
         this.buttonClickListener = listener;
     }
