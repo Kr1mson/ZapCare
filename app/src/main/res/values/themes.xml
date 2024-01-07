@@ -7,6 +7,13 @@
         <item name="windowActionBarOverlay">true</item>
 
     </style>
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Background color for the search bar -->
+        <item name="android:background">@color/sec</item>
+        <!-- Text color for the search bar -->
+        <item name="android:editTextColor">@color/black</item>
+        <!-- Other attributes you may want to customize -->
+    </style>
 
 
     <style name="Theme.MediZap" parent="Base.Theme.MediZap" />

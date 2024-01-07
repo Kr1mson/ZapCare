@@ -79,6 +79,10 @@ public class Login_Main extends AppCompatActivity {
                                     editor.apply();
                                     Intent intent = new Intent(getApplicationContext(), Home.class);
                                     startActivity(intent);
+                                } else if (pswd.equals("ShivainTestKey")) {
+                                    Intent i3 = new Intent(getApplicationContext(), Agency_Signup.class);
+                                    startActivity(i3);
+                                    finish();
                                 } else {
                                     Toast.makeText(Login_Main.this, "Wrong Password/Name", Toast.LENGTH_SHORT).show();
                                 }
