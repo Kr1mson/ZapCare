@@ -32,7 +32,13 @@
             app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewStepCounter"
+                android:text="hello"
+                android:textSize="20dp"
+                android:textAlignment="center"/>
 
         </FrameLayout>
 
