@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/prim</item>
         <item name="colorPrimaryDark">@color/prim</item>
         <item name="colorAccent">@color/sec</item>
+
     </style>
     <style name="ThemeActionBar"
         parent="Widget.AppCompat.Light.ActionBar.Solid">
