@@ -9,16 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class Reports extends Fragment {
-    public Reports(){}
+public class Hospital_Maps extends Fragment {
+    public Hospital_Maps(){}
     View view;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        view= inflater.inflate(R.layout.fragment_reports, container, false);
+        view= inflater.inflate(R.layout.fragment_hospital__maps, container, false);
         return view;
-
     }
 }

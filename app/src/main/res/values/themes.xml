@@ -15,5 +15,6 @@
         <!-- Other attributes you may want to customize -->
     </style>
 
+
     <style name="Theme.MediZap" parent="Base.Theme.MediZap" />
 </resources>

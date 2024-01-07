@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     Tracker fourthFragment = new Tracker();
     Reports fifthFragment = new Reports();
     TextView name,email;
+    Button test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         email = headerView.findViewById(R.id.email);
         name.setText(username);
         email.setText(emailid);
+
 
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,

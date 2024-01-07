@@ -24,9 +24,12 @@
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
+            android:name=".Hospital_Home"
+            android:exported="false" />
+        <activity
             android:name=".Signup"
             android:exported="false" />
-        <activity android:name=".Home"/>
+        <activity android:name=".Home" />
         <activity
             android:name=".Login_Main"
             android:exported="true"

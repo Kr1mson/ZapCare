@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BookAppointment extends Fragment implements ButtonAdapter.ButtonClickListener  {
+public class BookAppointment extends Fragment implements Button_Adapter_Date.ButtonClickListener  {
     Button jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec,lastPressedButton;
 
     public BookAppointment(){}
     View view;
     String selectedMonth;
     FloatingActionButton back;
-    ButtonAdapter buttonAdapter;
+    Button_Adapter_Date buttonAdapter;
     private TextView pkddate;
     private List<String> buttonList = new ArrayList<>();
     @Override
@@ -137,7 +136,7 @@ public class BookAppointment extends Fragment implements ButtonAdapter.ButtonCli
             }
         });
 
-        buttonAdapter = new ButtonAdapter(buttonList,this::onButtonClick);
+        buttonAdapter = new Button_Adapter_Date(buttonList,this::onButtonClick);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
