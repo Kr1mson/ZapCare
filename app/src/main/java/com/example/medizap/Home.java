@@ -36,11 +36,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     Reports fifthFragment = new Reports();
     TextView name,email;
     Button test;
-    TextView textViewStepCounter;
-    protected SensorManager sensorManager;
-    Sensor mStepCounter;
-    boolean isCounterSensorPresent;
-    int stepCount =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
