@@ -19,12 +19,13 @@ public class Doctors_Adapter extends RecyclerView.Adapter<Doctors_Adapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView, specializationTextView, feeTextView;
+        TextView nameTextView,hospitalTextView, specializationTextView, feeTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             nameTextView = itemView.findViewById(R.id.nameTextView);
+            hospitalTextView = itemView.findViewById(R.id.hospitalTextView);
             specializationTextView = itemView.findViewById(R.id.specializationTextView);
             feeTextView = itemView.findViewById(R.id.feeTextView);
         }
@@ -43,6 +44,7 @@ public class Doctors_Adapter extends RecyclerView.Adapter<Doctors_Adapter.ViewHo
 
         // Populate data into views
         holder.nameTextView.setText(doctor.getName());
+        holder.hospitalTextView.setText(doctor.getHospital_name());
         holder.specializationTextView.setText(doctor.getSpecialization());
         holder.feeTextView.setText(doctor.getFee());
     }

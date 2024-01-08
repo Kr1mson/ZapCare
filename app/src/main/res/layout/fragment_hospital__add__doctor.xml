@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/sec"
-                    android:hint="First Name"
+                    android:hint="Name"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,11 +63,11 @@
                 app:boxStrokeColor="@color/prim">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/lname_edtxt"
+                    android:id="@+id/hname_edtxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/sec"
-                    android:hint="Last Name"
+                    android:hint="Name of Hospital"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
