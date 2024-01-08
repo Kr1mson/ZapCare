@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 
@@ -32,14 +33,39 @@ public class Tracker extends Fragment implements SensorEventListener {
     private boolean isCounterSensorPresent;
     private int stepCount = 0;
     private int progressValue = 0;
+    private float steplength = 0.762f;
+    private int stepcountTarget = 0;
+    private TextView stepcountTargetTextView;
+    private SeekBar seekBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_tracker, container, false);
         progressBar = view.findViewById(R.id.progress_bar);
         progressText = view.findViewById(R.id.progress_text);
-        textViewStepCounter = view.findViewById(R.id.textViewStepCounter);
+        stepcountTargetTextView = view.findViewById(R.id.StepCountTarget);
 
+        stepcountTargetTextView.setText("Goal : "+stepcountTarget);
+        seekBar = view.findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                stepcountTarget = progress;
+                stepcountTargetTextView.setText("Goal : "+String.valueOf(progress));
+                progressBar.setMax(stepcountTarget);
+                updateStepCount();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         // Access the activity's window to keep the screen on
         if (getActivity() != null) {
             getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -53,42 +79,25 @@ public class Tracker extends Fragment implements SensorEventListener {
             isCounterSensorPresent = false;
         }
 
-
-        startProgressUpdates();
         return view;
     }
 
-    private void startProgressUpdates() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (progressValue <= 100) {
-                    updateProgress();
-                    handler.postDelayed(this, 200);
-                } else {
-                    handler.removeCallbacks(this);
-                }
-            }
-        }, 200);
-    }
-
-    private void updateProgress() {
-        progressText.setText(String.valueOf(progressValue));
-        progressBar.setProgress(progressValue);
-        progressValue++;
-    }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if (sensorEvent.sensor == stepCounterSensor) {
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             stepCount = (int) sensorEvent.values[0];
             updateStepCount();
+
         }
     }
 
     private void updateStepCount() {
-        textViewStepCounter.setText(String.valueOf(stepCount));
+        progressText.setText(String.valueOf(stepCount));
+        progressBar.setProgress(stepCount);
+        if(stepCount>=stepcountTarget){
+            progressText.setText("Finished");
+        }
     }
 
     @Override
