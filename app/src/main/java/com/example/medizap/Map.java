@@ -44,6 +44,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Map extends Fragment {
+    public Map() {
+    }
 
     // Initialize variables
     Button btLocation;

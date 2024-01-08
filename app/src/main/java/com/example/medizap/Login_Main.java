@@ -79,7 +79,7 @@ public class Login_Main extends AppCompatActivity {
                                     editor.apply();
                                     Intent intent = new Intent(getApplicationContext(), Home.class);
                                     startActivity(intent);
-                                } else if (pswd.equals("ShivainTestKey")) {
+                                } else if (pswd.equals("admin")) {
                                     Intent i3 = new Intent(getApplicationContext(), Agency_Signup.class);
                                     startActivity(i3);
                                     finish();
