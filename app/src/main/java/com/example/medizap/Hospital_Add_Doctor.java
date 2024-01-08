@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,6 +32,7 @@ public class Hospital_Add_Doctor extends Fragment {
     DatabaseReference href;
     EditText Fname,Dept,Fee,Hname;
     Button save;
+    FloatingActionButton back;
     public static boolean containsSpecialCharacters(String input) {
         // Define a string containing allowed characters (alphanumeric and space)
         String allowedCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ";
@@ -53,6 +56,15 @@ public class Hospital_Add_Doctor extends Fragment {
         Hname=view.findViewById(R.id.hname_edtxt);
         Dept=view.findViewById(R.id.dept_edtxt);
         Fee=view.findViewById(R.id.fee_edtxt);
+        back=view.findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fr = getFragmentManager().beginTransaction();
+                fr.replace(R.id.flFragment, new Hospital_Doctors());
+                fr.commit();
+            }
+        });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

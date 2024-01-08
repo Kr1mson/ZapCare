@@ -1,11 +1,14 @@
 package com.example.medizap;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,16 +37,20 @@ public class Hospital_Doctors extends Fragment {
     private Doctors_Adapter doctorsAdapter;
     private List<Doctor> doctorList;
     FloatingActionButton add;
-    String name, hname, dept, fee;
+    String name, hname, dept,fee;
+    Button delete;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_hospital__doctors, container, false);
         recyclerViewDoctors = view.findViewById(R.id.recyclerViewDoctors);
-        recyclerViewDoctors.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewDoctors.setLayoutManager(new GridLayoutManager(getContext(), 2));
         dbref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Doctor_Details");
         add=view.findViewById(R.id.addnew);
+
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
