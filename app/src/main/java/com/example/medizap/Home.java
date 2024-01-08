@@ -26,7 +26,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 
-public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, SensorEventListener {
+public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
     Map firstFragment = new Map();
@@ -36,11 +36,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     Reports fifthFragment = new Reports();
     TextView name,email;
     Button test;
-    TextView textViewStepCounter;
-    protected SensorManager sensorManager;
-    Sensor mStepCounter;
-    boolean isCounterSensorPresent;
-    int stepCount =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,18 +70,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.Tracker);
 
-        textViewStepCounter = findViewById(R.id.textViewStepCounter);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!=null){
-            mStepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-            isCounterSensorPresent = true;
-        }
-        else{
-            textViewStepCounter.setText("Counter Sensor is Not Present");
-            isCounterSensorPresent = false;
-        }
 
     }
 
@@ -139,31 +124,5 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         }
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        if(sensorEvent.sensor == mStepCounter){
-            stepCount = (int) sensorEvent.values[0];
-            textViewStepCounter.setText(String.valueOf(stepCount));
-        }
 
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!=null)
-            sensorManager.registerListener(this, mStepCounter, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if(sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)!=null)
-            sensorManager.unregisterListener(this,mStepCounter);
-    }
 }

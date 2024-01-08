@@ -5,10 +5,55 @@
     android:layout_height="match_parent"
     tools:context=".Tracker">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewStepCounter"
+        android:text="Step Count: 0"
+        android:textSize="20dp"
+        android:textAlignment="center"/>
+    <LinearLayout
+
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="tracker" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <RelativeLayout
+            android:id="@+id/progress_layout"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="100dp">
+
+            <!--progress bar implementation-->
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/circular_shape"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/circular_progress_bar"
+                android:textAlignment="center" />
+
+            <!--Text implementation in center of the progress bar-->
+            <TextView
+                android:id="@+id/progress_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="---"
+                android:textColor="@color/prim"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
 </FrameLayout>
