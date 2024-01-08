@@ -19,7 +19,7 @@ public class Doctors_Adapter extends RecyclerView.Adapter<Doctors_Adapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView,hospitalTextView, specializationTextView, feeTextView;
+        TextView nameTextView, hospitalTextView, specializationTextView, feeTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -43,10 +43,10 @@ public class Doctors_Adapter extends RecyclerView.Adapter<Doctors_Adapter.ViewHo
         Doctor doctor = doctors.get(position);
 
         // Populate data into views
-        holder.nameTextView.setText(doctor.getName());
+        holder.nameTextView.setText("Dr. " + doctor.getName());
         holder.hospitalTextView.setText(doctor.getHospital_name());
         holder.specializationTextView.setText(doctor.getSpecialization());
-        holder.feeTextView.setText(doctor.getFee());
+        holder.feeTextView.setText("$"+doctor.getFee()+" per session");
     }
 
     @Override
