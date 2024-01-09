@@ -6,13 +6,7 @@
     tools:context=".Tracker">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewStepCounter"
-        android:text="Step Count: 0"
-        android:textSize="20dp"
-        android:textAlignment="center"/>
+
     <LinearLayout
 
         android:layout_width="match_parent"
@@ -52,6 +46,20 @@
                 android:textSize="28sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/StepCountTarget"
+            android:text = "0"
+            android:textSize="20dp"
+            android:textAlignment="center"/>
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="309dp"
+            android:layout_height="wrap_content"
+            android:max="10000"
+            android:progress="0" />
 
 
     </LinearLayout>
