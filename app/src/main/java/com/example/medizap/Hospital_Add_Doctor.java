@@ -76,11 +76,11 @@ public class Hospital_Add_Doctor extends Fragment {
                 String fee=Fee.getText().toString();
                 String btime=Btime.getText().toString();
                 String etime=Etime.getText().toString();
-                if(fname.equals("")||hname.equals("")||dept.equals("")||fee.equals("")){
+                if(fname.equals("")||hname.equals("")||dept.equals("")||fee.equals("")||btime.equals("")||etime.equals("")){
                     Toast.makeText(getContext(),"Please fill all the fields",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Doctor_Helper doctorHelper = new Doctor_Helper(fname, hname,dept,fee);
+                    Doctor_Helper doctorHelper = new Doctor_Helper(fname, hname,dept,fee,btime,etime);
                     hdb= FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/");
                     href = hdb.getReference("Hospital_Details");
                     dref = hdb.getReference("Doctor_Details");
@@ -95,6 +95,8 @@ public class Hospital_Add_Doctor extends Fragment {
                                 Hname.setText("");
                                 Dept.setText("");
                                 Fee.setText("");
+                                Btime.setText("");
+                                Etime.setText("");
                                 Toast.makeText(getContext(), "Doctor registered", Toast.LENGTH_SHORT).show();
                             }
                         });

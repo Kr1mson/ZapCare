@@ -37,7 +37,7 @@ public class Hospital_Doctors extends Fragment {
     private Doctors_Adapter doctorsAdapter;
     private List<Doctor> doctorList;
     FloatingActionButton add;
-    String name, hname, dept,fee;
+    String name, hname, dept,fee,btime,etime;
     Button delete;
 
     @Override
@@ -75,7 +75,9 @@ public class Hospital_Doctors extends Fragment {
                         hname = doc.getHname();
                         dept = doc.getDept();
                         fee = doc.getFee();
-                        Doctor doctor = new Doctor(name, hname, dept, fee);
+                        btime = doc.getBtime();
+                        etime = doc.getEtime();
+                        Doctor doctor = new Doctor(name, hname, dept, fee,btime,etime);
                         doctorList.add(doctor);
                     }
                     else{

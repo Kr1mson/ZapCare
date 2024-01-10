@@ -56,6 +56,8 @@ public class Login_Main extends AppCompatActivity {
                 }
                 else{
                     DatabaseReference user_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("User_Data");
+                    DatabaseReference h_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Hospital_Users");
+
                     Query checkUser = user_ref.orderByChild("name").equalTo(name);
                     checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
