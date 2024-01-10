@@ -55,10 +55,11 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/agency_name"
                 android:textStyle="bold"
-                android:text="Agency Name"
+                android:text=" Agency Name"
                 android:textSize="30sp"
                 android:textColor="@color/prim"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/medical_service"/>
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"/>
