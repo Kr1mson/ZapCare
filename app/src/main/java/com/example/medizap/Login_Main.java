@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Arrays;
+
 public class Login_Main extends AppCompatActivity {
 
     EditText Email,Pswd,Name;
@@ -49,6 +51,8 @@ public class Login_Main extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("user_credentials", MODE_PRIVATE);
         final String[] username = {preferences.getString("username", null)};
         String token = preferences.getString("pswd", null);
+        String finalname = Arrays.toString(username);
+        sharedname = finalname.substring(1,finalname.length()-1);
 
         if (username[0] != null && token != null) {
             Toast.makeText(Login_Main.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
@@ -63,7 +67,7 @@ public class Login_Main extends AppCompatActivity {
                 String email=Email.getText().toString();
                 String pswd=Pswd.getText().toString();
                 String uniqueUsername = extractUsername(email);
-                sharedname=uniqueUsername;
+                //sharedname=uniqueUsername;
                 if(email.isEmpty()||pswd.isEmpty()){
                     Toast.makeText(Login_Main.this,"Please fill all the fields", Toast.LENGTH_SHORT).show();
                 }
