@@ -85,8 +85,8 @@ public class Doctors_Adapter extends RecyclerView.Adapter<Doctors_Adapter.ViewHo
         holder.hospitalTextView.setText(doctor.getHospital_name());
         holder.specializationTextView.setText(doctor.getSpecialization());
         holder.feeTextView.setText("$"+doctor.getFee()+" per session");
-        holder.btimeTextView.setText("Shift Start time "+doctor.getBtime());
-        holder.etimeTextview.setText("End time "+doctor.getEtime());
+        holder.btimeTextView.setText(doctor.getBtime()+":00");
+        holder.etimeTextview.setText(doctor.getEtime()+":00");
     }
 
     @Override

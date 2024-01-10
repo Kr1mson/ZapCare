@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class Button_Adapter_Date extends RecyclerView.Adapter<Button_Adapter_Dat
         void onButtonClick(String date);
     }
 
+
     // Constructor to set the callback
     public Button_Adapter_Date(List<String> buttonList, ButtonClickListener listener) {
         this.buttonList = buttonList;
@@ -34,6 +36,7 @@ public class Button_Adapter_Date extends RecyclerView.Adapter<Button_Adapter_Dat
             button = itemView.findViewById(R.id.buttonItem);
         }
     }
+
 
     @NonNull
     @Override

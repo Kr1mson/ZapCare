@@ -3,7 +3,9 @@ package com.example.medizap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +19,7 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
     }
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, hospitalTextView, specializationTextView, feeTextView;
-
+        Button schedule;
         ViewHolder(View itemView) {
             super(itemView);
 
@@ -25,6 +27,13 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
             hospitalTextView = itemView.findViewById(R.id.hospitalTextView);
             specializationTextView = itemView.findViewById(R.id.specializationTextView);
             feeTextView = itemView.findViewById(R.id.feeTextView);
+            schedule=itemView.findViewById(R.id.schedule);
+            schedule.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(itemView.getContext(), "Schedule Pressed", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
     @NonNull
