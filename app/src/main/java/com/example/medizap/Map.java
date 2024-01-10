@@ -48,8 +48,7 @@ public class Map extends Fragment {
     }
 
     // Initialize variables
-    Button btLocation;
-    Button btlocation2;
+
 
     TextView Agency_name, Agency_type, Agency_helpline, Agency_lat, Agency_long;
     FusedLocationProviderClient client;
@@ -69,8 +68,6 @@ public class Map extends Fragment {
         SupportMapFragment supportMapFragment=(SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.google_map);
 
-        btLocation = view.findViewById(R.id.bt_location);
-        btlocation2 = view.findViewById(R.id.bt_location2);
         Agency_name=view.findViewById(R.id.agency_name);
         Agency_helpline=view.findViewById(R.id.agency_helpline);
         Agency_lat=view.findViewById(R.id.agency_lat);
@@ -89,41 +86,35 @@ public class Map extends Fragment {
                         != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
-                btlocation2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Firebase code to retrieve the data
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Agency_Details");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Agency_Details");
 
-                        if (googleMap != null) {
-                            databaseReference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                        Agency_UserHelper agency = postSnapshot.getValue(Agency_UserHelper.class);
-                                        if (agency != null) {
-                                            String latitudeString = agency.getLatitude();
-                                            String longitudeString = agency.getLongitude();
-                                            try {
-                                                double latitude = Double.parseDouble(latitudeString);
-                                                double longitude = Double.parseDouble(longitudeString);
-                                                LatLng latLng = new LatLng(latitude, longitude);
-                                                googleMap.addMarker(new MarkerOptions().position(latLng).title(agency.getAg_name()));
-                                            } catch (NumberFormatException e) {
-                                                // Handle the exception appropriately
-                                            }
-                                        }
+                if (googleMap != null) {
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                Agency_UserHelper agency = postSnapshot.getValue(Agency_UserHelper.class);
+                                if (agency != null) {
+                                    String latitudeString = agency.getLatitude();
+                                    String longitudeString = agency.getLongitude();
+                                    try {
+                                        double latitude = Double.parseDouble(latitudeString);
+                                        double longitude = Double.parseDouble(longitudeString);
+                                        LatLng latLng = new LatLng(latitude, longitude);
+                                        googleMap.addMarker(new MarkerOptions().position(latLng).title(agency.getAg_name()));
+                                    } catch (NumberFormatException e) {
+                                        // Handle the exception appropriately
                                     }
                                 }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    // Handle error
-                                }
-                            });
+                            }
                         }
-                    }
-                });
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Handle error
+                        }
+                    });
+                }
 
                 googleMap.setMyLocationEnabled(true); // Enable the My Location layer
                 googleMap.getUiSettings().setMyLocationButtonEnabled(true); // Enable the My Location button
@@ -176,40 +167,33 @@ public class Map extends Fragment {
                         getActivity());
 
 
-        btLocation.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override public void onClick(View view)
-                    {
-                        // check condition
-                        if (ContextCompat.checkSelfPermission(
-                                getActivity(),
-                                Manifest.permission
-                                        .ACCESS_FINE_LOCATION)
-                                == PackageManager
-                                .PERMISSION_GRANTED
-                                && ContextCompat.checkSelfPermission(
-                                getActivity(),
-                                Manifest.permission
-                                        .ACCESS_COARSE_LOCATION)
-                                == PackageManager
-                                .PERMISSION_GRANTED) {
-                            // When permission is granted
-                            // Call method
-                            getCurrentLocation();
-                        }
-                        else {
-                            // When permission is not granted
-                            // Call method
-                            requestPermissions(
-                                    new String[] {
-                                            Manifest.permission
-                                                    .ACCESS_FINE_LOCATION,
-                                            Manifest.permission
-                                                    .ACCESS_COARSE_LOCATION },
-                                    100);
-                        }
-                    }
-                });
+        if (ContextCompat.checkSelfPermission(
+                getActivity(),
+                Manifest.permission
+                        .ACCESS_FINE_LOCATION)
+                == PackageManager
+                .PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(
+                getActivity(),
+                Manifest.permission
+                        .ACCESS_COARSE_LOCATION)
+                == PackageManager
+                .PERMISSION_GRANTED) {
+            // When permission is granted
+            // Call method
+            getCurrentLocation();
+        }
+        else {
+            // When permission is not granted
+            // Call method
+            requestPermissions(
+                    new String[] {
+                            Manifest.permission
+                                    .ACCESS_FINE_LOCATION,
+                            Manifest.permission
+                                    .ACCESS_COARSE_LOCATION },
+                    100);
+        }
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
