@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,9 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
 
     public BookAppointment(){}
     View view;
+    private RecyclerView docrecyclerView;
+    private book_doc_adapter doctorsAdapter;
+    private List<Doctor> doctorList;
     String selectedMonth;
     FloatingActionButton back;
     Button_Adapter_Date buttonAdapter;
@@ -58,6 +62,7 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
                 fr.commit();
             }
         });
+
 
 
 
@@ -178,6 +183,13 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
         // Handle the selected date here
         if (pkddate != null) {
             pkddate.setText("Selected Date: "+date + " " + selectedMonth);
+            docrecyclerView = view.findViewById(R.id.docrecyclerView);
+            docrecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+            doctorList = new ArrayList<>();
+            doctorsAdapter = new book_doc_adapter(doctorList);
+            docrecyclerView.setAdapter(doctorsAdapter);
+            Doctor doctor = new Doctor("name", "hname", "dept", "fee");
+            doctorList.add(doctor);
         }
 
     }

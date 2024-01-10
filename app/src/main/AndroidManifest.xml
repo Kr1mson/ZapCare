@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
-    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
-    
+    <uses-feature
+        android:name="android.hardware.sensor.accelerometer"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,9 +22,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MediZap"
         tools:targetApi="31">
+        <activity
+            android:name=".Hospital_Signup"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDtTQ8RKX-V6hmGqUE_Ep3FgH9Z_zm-EJQ" />
+
         <activity
             android:name=".Agency_Signup"
             android:exported="false" />

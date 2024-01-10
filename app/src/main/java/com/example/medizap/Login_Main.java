@@ -24,21 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 public class Login_Main extends AppCompatActivity {
 
     EditText Email,Pswd,Name;
-    Button login,test;
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         setContentView(R.layout.login_main);
         super.onCreate(savedInstanceState);
-        test=findViewById(R.id.test);
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Hospital_Home.class);
-                startActivity(intent);
-            }
-        });
+
         login=findViewById(R.id.login_btn);
         Name=findViewById(R.id.nam_edtxt);
         Pswd=findViewById(R.id.pswd_edtxt);
@@ -104,5 +97,9 @@ public class Login_Main extends AppCompatActivity {
     public void onSignupClick(View view) {
         Intent i_signup=new Intent(getApplicationContext(),Signup.class);
         startActivity(i_signup);
-        }
+    }
+    public void onRegisterClick(View view) {
+        Intent i_register=new Intent(getApplicationContext(),Hospital_Signup.class);
+        startActivity(i_register);
+    }
 }

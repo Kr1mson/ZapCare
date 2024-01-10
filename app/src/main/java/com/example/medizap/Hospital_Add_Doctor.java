@@ -30,7 +30,7 @@ public class Hospital_Add_Doctor extends Fragment {
     FirebaseDatabase hdb;
     DatabaseReference dref;
     DatabaseReference href;
-    EditText Fname,Dept,Fee,Hname;
+    EditText Fname,Dept,Fee,Hname,Btime,Etime;
     Button save;
     FloatingActionButton back;
     public static boolean containsSpecialCharacters(String input) {
@@ -56,6 +56,8 @@ public class Hospital_Add_Doctor extends Fragment {
         Hname=view.findViewById(R.id.hname_edtxt);
         Dept=view.findViewById(R.id.dept_edtxt);
         Fee=view.findViewById(R.id.fee_edtxt);
+        Btime=view.findViewById(R.id.startTime_edtxt);
+        Etime=view.findViewById(R.id.endTime_edtxt);
         back=view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +74,8 @@ public class Hospital_Add_Doctor extends Fragment {
                 String hname=Hname.getText().toString();
                 String dept=Dept.getText().toString();
                 String fee=Fee.getText().toString();
+                String btime=Btime.getText().toString();
+                String etime=Etime.getText().toString();
                 if(fname.equals("")||hname.equals("")||dept.equals("")||fee.equals("")){
                     Toast.makeText(getContext(),"Please fill all the fields",Toast.LENGTH_LONG).show();
                 }
