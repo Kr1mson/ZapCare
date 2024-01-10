@@ -23,13 +23,28 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Patient"
-                android:layout_gravity="end"
-                android:textSize="15dp"
-                android:textStyle="bold"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Doctor"
+                    android:layout_weight="1"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Patient"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,14 +85,29 @@
                 android:textSize="15dp"
 
                 android:id="@+id/hospitalTextView"/>
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date"
-                android:textSize="20dp"
-                android:layout_gravity="end"
-                android:textStyle="bold"
-                android:id="@+id/dateTextView"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fee"
+                    android:layout_weight="1"
+                    android:id="@+id/feeTextView"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
+
+                    android:textStyle="bold"
+                    android:id="@+id/dateTextView"/>
+
+            </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -88,11 +118,7 @@
                 android:textStyle="bold"
                 android:id="@+id/timeTextView"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fee"
-                android:id="@+id/feeTextView"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

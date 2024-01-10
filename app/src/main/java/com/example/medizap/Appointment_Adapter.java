@@ -42,7 +42,7 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
 
         // Populate data into views
         holder.unameTextView.setText(appointment.getUName());
-        holder.dnameTextView.setText("Dr. " + appointment.getDName());
+        holder.dnameTextView.setText(appointment.getDName());
         holder.hospitalTextView.setText(appointment.getHname());
         holder.specializationTextView.setText(appointment.getDept());
         holder.feeTextView.setText("$"+appointment.getFee()+" per session");
