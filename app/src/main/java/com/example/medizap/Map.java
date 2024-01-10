@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,8 +50,7 @@ public class Map extends Fragment {
     }
 
     // Initialize variables
-    Button btLocation;
-    Button btlocation2;
+
 
     TextView Agency_name, Agency_type, Agency_helpline, Agency_lat, Agency_long;
     FusedLocationProviderClient client;
@@ -69,8 +70,6 @@ public class Map extends Fragment {
         SupportMapFragment supportMapFragment=(SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.google_map);
 
-        btLocation = view.findViewById(R.id.bt_location);
-        btlocation2 = view.findViewById(R.id.bt_location2);
         Agency_name=view.findViewById(R.id.agency_name);
         Agency_helpline=view.findViewById(R.id.agency_helpline);
         Agency_lat=view.findViewById(R.id.agency_lat);
@@ -89,41 +88,35 @@ public class Map extends Fragment {
                         != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
-                btlocation2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Firebase code to retrieve the data
-                        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Agency_Details");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Agency_Details");
 
-                        if (googleMap != null) {
-                            databaseReference.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                        Agency_UserHelper agency = postSnapshot.getValue(Agency_UserHelper.class);
-                                        if (agency != null) {
-                                            String latitudeString = agency.getLatitude();
-                                            String longitudeString = agency.getLongitude();
-                                            try {
-                                                double latitude = Double.parseDouble(latitudeString);
-                                                double longitude = Double.parseDouble(longitudeString);
-                                                LatLng latLng = new LatLng(latitude, longitude);
-                                                googleMap.addMarker(new MarkerOptions().position(latLng).title(agency.getAg_name()));
-                                            } catch (NumberFormatException e) {
-                                                // Handle the exception appropriately
-                                            }
-                                        }
+                if (googleMap != null) {
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                Agency_UserHelper agency = postSnapshot.getValue(Agency_UserHelper.class);
+                                if (agency != null) {
+                                    String latitudeString = agency.getLatitude();
+                                    String longitudeString = agency.getLongitude();
+                                    try {
+                                        double latitude = Double.parseDouble(latitudeString);
+                                        double longitude = Double.parseDouble(longitudeString);
+                                        LatLng latLng = new LatLng(latitude, longitude);
+                                        googleMap.addMarker(new MarkerOptions().position(latLng).title(agency.getAg_name()));
+                                    } catch (NumberFormatException e) {
+                                        // Handle the exception appropriately
                                     }
                                 }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    // Handle error
-                                }
-                            });
+                            }
                         }
-                    }
-                });
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Handle error
+                        }
+                    });
+                }
 
                 googleMap.setMyLocationEnabled(true); // Enable the My Location layer
                 googleMap.getUiSettings().setMyLocationButtonEnabled(true); // Enable the My Location button
@@ -154,12 +147,25 @@ public class Map extends Fragment {
                         }
                     }
                 });
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+
+                        Toast.makeText(getContext(), "Marker clicked: ", Toast.LENGTH_SHORT).show();
+                        fetchAgencyDetails(marker);
+                        return true;
+
+
+                    }
+                });
+
+
 
                 // Set a click listener for the map if you want to add markers on click (you can keep your existing code for this)
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
-                        // Your existing code for adding markers on map click
+
                     }
                 });
             }
@@ -176,40 +182,33 @@ public class Map extends Fragment {
                         getActivity());
 
 
-        btLocation.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override public void onClick(View view)
-                    {
-                        // check condition
-                        if (ContextCompat.checkSelfPermission(
-                                getActivity(),
-                                Manifest.permission
-                                        .ACCESS_FINE_LOCATION)
-                                == PackageManager
-                                .PERMISSION_GRANTED
-                                && ContextCompat.checkSelfPermission(
-                                getActivity(),
-                                Manifest.permission
-                                        .ACCESS_COARSE_LOCATION)
-                                == PackageManager
-                                .PERMISSION_GRANTED) {
-                            // When permission is granted
-                            // Call method
-                            getCurrentLocation();
-                        }
-                        else {
-                            // When permission is not granted
-                            // Call method
-                            requestPermissions(
-                                    new String[] {
-                                            Manifest.permission
-                                                    .ACCESS_FINE_LOCATION,
-                                            Manifest.permission
-                                                    .ACCESS_COARSE_LOCATION },
-                                    100);
-                        }
-                    }
-                });
+        if (ContextCompat.checkSelfPermission(
+                getActivity(),
+                Manifest.permission
+                        .ACCESS_FINE_LOCATION)
+                == PackageManager
+                .PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(
+                getActivity(),
+                Manifest.permission
+                        .ACCESS_COARSE_LOCATION)
+                == PackageManager
+                .PERMISSION_GRANTED) {
+            // When permission is granted
+            // Call method
+            getCurrentLocation();
+        }
+        else {
+            // When permission is not granted
+            // Call method
+            requestPermissions(
+                    new String[] {
+                            Manifest.permission
+                                    .ACCESS_FINE_LOCATION,
+                            Manifest.permission
+                                    .ACCESS_COARSE_LOCATION },
+                    100);
+        }
         searchView = view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -380,5 +379,37 @@ public class Map extends Fragment {
         Agency_helpline.setText(agency.getH_no());
         Agency_lat.setText(agency.getLatitude());
         Agency_long.setText(agency.getLongitude());
+    }
+    private void fetchAgencyDetails(Marker marker) {
+        // Retrieve agency details from Firebase using the marker's title
+        String agencyName = marker.getTitle();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Agency_Details");
+
+        databaseReference.orderByChild("ag_name").equalTo(agencyName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Agency_UserHelper agency = snapshot.getValue(Agency_UserHelper.class);
+                        if (agency != null) {
+                            Agency_name.setText(agency.getAg_name());
+                            Agency_helpline.setText(agency.getH_no());
+                            Agency_lat.setText(agency.getLatitude());
+                            Agency_long.setText(agency.getLongitude());
+                            displayAgencyDetails(agency);
+                        }
+                    }
+                } else {
+                    // Agency not found
+                    Toast.makeText(requireContext(), "Agency not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(requireContext(), "Error fetching agency details", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
