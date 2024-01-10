@@ -37,7 +37,7 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
     private RecyclerView docrecyclerView;
     private book_doc_adapter doctorsAdapter;
     private List<appointmentBookingHelper> doctorList;
-    String selectedMonth;
+    public static String selectedMonth,Date;
     FloatingActionButton back;
     Button_Adapter_Date buttonAdapter;
     private TextView pkddate;
@@ -193,6 +193,7 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
     public void onButtonClick(String date) {
         // Handle the selected date here
         if (pkddate != null) {
+            Date=date;
             pkddate.setText("Selected Date: "+date + " " + selectedMonth);
             docrecyclerView = view.findViewById(R.id.docrecyclerView);
             docrecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));

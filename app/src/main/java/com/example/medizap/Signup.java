@@ -56,7 +56,7 @@ public class Signup extends AppCompatActivity {
                     Toast.makeText(Signup.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    if(pswd.length()==8) {
+                    if(pswd.length()>=8) {
                         if (pswd.equals(repswd)) {
                             User_Helper uh = new User_Helper(name, email, pswd,uniqueUsername);
                             userdb = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/");

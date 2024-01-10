@@ -1,5 +1,8 @@
 package com.example.medizap;
 
+import static com.example.medizap.BookAppointment.Date;
+import static com.example.medizap.BookAppointment.selectedMonth;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.ViewHolder> {
+
+
     private List<appointmentBookingHelper> doctors;
     public book_doc_adapter(List<appointmentBookingHelper> doctors) {
         this.doctors = doctors;
@@ -23,6 +28,7 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
         ViewHolder(View itemView) {
             super(itemView);
 
+
             nameTextView = itemView.findViewById(R.id.nameTextView);
             hospitalTextView = itemView.findViewById(R.id.hospitalTextView);
             specializationTextView = itemView.findViewById(R.id.specializationTextView);
@@ -31,7 +37,7 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
             schedule.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(itemView.getContext(), "Schedule Pressed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), Date+selectedMonth, Toast.LENGTH_SHORT).show();
                 }
             });
         }
