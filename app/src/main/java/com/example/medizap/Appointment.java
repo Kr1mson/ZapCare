@@ -1,7 +1,9 @@
 package com.example.medizap;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +30,7 @@ public class Appointment extends Fragment {
     private RecyclerView recyclerViewAppointment;
     private Appointment_Adapter appointmentAdapter;
     private List<Appointment_List> appointmentList;
+    String uname, dname, hname, dept, fee,date,month;
     FloatingActionButton booknew;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,14 +44,42 @@ public class Appointment extends Fragment {
         appointmentList = new ArrayList<>();
         appointmentAdapter = new Appointment_Adapter(appointmentList,getContext());
         recyclerViewAppointment.setAdapter(appointmentAdapter);
-        Appointment_List list1 = new Appointment_List("Uname","Dname", "hname", "dept", "fee","date","time");
-        appointmentList.add(list1);
-        Appointment_List list2 = new Appointment_List("Uname","Dname", "hname", "dept", "fee","date","time");
-        appointmentList.add(list2);
-        Appointment_List list3 = new Appointment_List("Uname","Dname", "hname", "dept", "fee","date","time");
-        appointmentList.add(list3);
-        Appointment_List list4 = new Appointment_List("Uname","Dname", "hname", "dept", "fee","date","time");
-        appointmentList.add(list4);
+        DatabaseReference ap_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Appointments");
+
+        ap_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                appointmentList.clear();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Book_Doc_Helper_DB bd = postSnapshot.getValue(Book_Doc_Helper_DB.class);
+                    if (bd!= null) {
+                        uname = bd.getUname();
+                        dname = bd.getDname();
+                        hname = bd.getHname();
+                        dept = bd.getDept();
+                        fee = bd.getFee();
+                        date = bd.getDate();
+                        month = bd.getMonth();
+                        Appointment_List appointments = new Appointment_List(uname,dname,hname,dept,fee,date,month);
+                        appointmentList.add(appointments);
+                    }
+                    else{
+                        Toast.makeText(getContext(),"Please add a doctor first",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getContext(),Hospital_Add_Doctor.class);
+                        startActivity(intent);
+                    }
+                }
+
+                appointmentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
 
         booknew.setOnClickListener(new View.OnClickListener() {
             @Override

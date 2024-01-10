@@ -38,6 +38,7 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
         TextView nameTextView, hospitalTextView, specializationTextView, feeTextView,waitTextView;
         String name, hospital,fee, dept, wait;
         Button schedule;
+
         ViewHolder(View itemView) {
             super(itemView);
 
@@ -53,11 +54,13 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
                 public void onClick(View v) {
                     DatabaseReference user_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("User_Data");
 
+
                     user_ref.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
-                                String patient_name = snapshot.child("name").getValue(String.class);
+                                //String patient_name = snapshot.child("name").getValue(String.class);
+                                String patient_name=Login_Main.sharedname;
                                 name = nameTextView.getText().toString();
                                 hospital = hospitalTextView.getText().toString();
                                 dept = specializationTextView.getText().toString();
