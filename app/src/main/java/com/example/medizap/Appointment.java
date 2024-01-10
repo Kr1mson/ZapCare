@@ -30,7 +30,7 @@ public class Appointment extends Fragment {
     private RecyclerView recyclerViewAppointment;
     private Appointment_Adapter appointmentAdapter;
     private List<Appointment_List> appointmentList;
-    String uname, dname, hname, dept, fee,date,month;
+    String uname, dname, hname, dept, fee,date,month,approval;
     FloatingActionButton booknew;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +60,9 @@ public class Appointment extends Fragment {
                         fee = bd.getFee();
                         date = bd.getDate();
                         month = bd.getMonth();
-                        Appointment_List appointments = new Appointment_List(uname,dname,hname,dept,fee,date,month);
+                        approval = bd.getApproval();
+
+                        Appointment_List appointments = new Appointment_List(uname,dname,hname,dept,fee,date,month,approval);
                         appointmentList.add(appointments);
                     }
                     else{

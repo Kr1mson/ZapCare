@@ -113,12 +113,6 @@
                     android:text="Fee"
                     android:layout_weight="1"
                     android:id="@+id/feeTextView"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Waiting"
-                    android:layout_weight="1"
-                    android:id="@+id/waitView"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -133,6 +127,13 @@
 
             </LinearLayout>
 
+
+            <TextView
+                android:id="@+id/waitView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Waiting" />
 
             <TextView
                 android:layout_width="wrap_content"
