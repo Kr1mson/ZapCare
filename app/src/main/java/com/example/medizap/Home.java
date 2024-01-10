@@ -123,6 +123,9 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             super.onBackPressed();
         }
     }
-
+    public void onHospiClick(View view) {
+        Intent i_signup=new Intent(getApplicationContext(),Hospital_Home.class);
+        startActivity(i_signup);
+    }
 
 }
