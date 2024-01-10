@@ -33,7 +33,7 @@ public class Appointment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewAppointment.setLayoutManager(layoutManager);
         appointmentList = new ArrayList<>();
-        appointmentAdapter = new Appointment_Adapter(appointmentList);
+        appointmentAdapter = new Appointment_Adapter(appointmentList,getContext());
         recyclerViewAppointment.setAdapter(appointmentAdapter);
         Appointment_List list1 = new Appointment_List("Uname","Dname", "hname", "dept", "fee","date","time");
         appointmentList.add(list1);

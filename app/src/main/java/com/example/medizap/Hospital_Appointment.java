@@ -40,7 +40,7 @@ public class Hospital_Appointment extends Fragment {
         appointmentList = new ArrayList<>();
         pendingList = new ArrayList<>();
 
-        appointmentAdapter = new Appointment_Adapter(appointmentList);
+        appointmentAdapter = new Appointment_Adapter(appointmentList,getContext());
         pendingAdapter = new Pending_Adapter(pendingList);
 
         recyclerViewAppointment.setAdapter(appointmentAdapter);
