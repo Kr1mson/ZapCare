@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.ViewHolder> {
-    private List<Doctor> doctors;
-    public book_doc_adapter(List<Doctor> doctors) {
+    private List<appointmentBookingHelper> doctors;
+    public book_doc_adapter(List<appointmentBookingHelper> doctors) {
         this.doctors = doctors;
     }
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -35,13 +35,14 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
     }
     @Override
     public void onBindViewHolder(@NonNull book_doc_adapter.ViewHolder holder, int position) {
-        Doctor doctor = doctors.get(position);
+        appointmentBookingHelper doctor = doctors.get(position);
 
         // Populate data into views
         holder.nameTextView.setText("Dr. " + doctor.getName());
         holder.hospitalTextView.setText(doctor.getHospital_name());
         holder.specializationTextView.setText(doctor.getSpecialization());
         holder.feeTextView.setText("$"+doctor.getFee()+" per session");
+
     }
 
     @Override

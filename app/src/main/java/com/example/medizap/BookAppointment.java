@@ -1,8 +1,10 @@
 package com.example.medizap;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,8 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,15 +36,18 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
     View view;
     private RecyclerView docrecyclerView;
     private book_doc_adapter doctorsAdapter;
-    private List<Doctor> doctorList;
+    private List<appointmentBookingHelper> doctorList;
     String selectedMonth;
     FloatingActionButton back;
     Button_Adapter_Date buttonAdapter;
     private TextView pkddate;
+    String name, hname, dept,fee;
     private List<String> buttonList = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
 
         view= inflater.inflate(R.layout.fragment_book_appointment, container, false);
         jan=view.findViewById(R.id.Jan);
@@ -188,8 +199,37 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
             doctorList = new ArrayList<>();
             doctorsAdapter = new book_doc_adapter(doctorList);
             docrecyclerView.setAdapter(doctorsAdapter);
-            Doctor doctor = new Doctor("name", "hname", "dept", "fee","btime", "etime");
-            doctorList.add(doctor);
+            DatabaseReference dbref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Doctor_Details");
+            dbref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    doctorList.clear();
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        Doctor_Helper doc = postSnapshot.getValue(Doctor_Helper.class);
+                        if (doc!= null) {
+                            name = doc.getName();
+                            hname = doc.getHname();
+                            dept = doc.getDept();
+                            fee = doc.getFee();
+                            appointmentBookingHelper appointmentBookingHelper= new appointmentBookingHelper(name, hname, dept, fee);
+                            doctorList.add(appointmentBookingHelper);
+                        }
+                        else{
+                            Toast.makeText(getContext(),"Please add a doctor first",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getContext(),Hospital_Add_Doctor.class);
+                            startActivity(intent);
+                        }
+                    }
+                    doctorsAdapter.notifyDataSetChanged();
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
 
     }
