@@ -137,17 +137,6 @@
             android:layout_height="20dp"/>
 
         <TextView
-            android:id="@+id/registertxt"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:onClick="onRegisterClick"
-            android:text="Register"
-            android:textColor="@color/prim"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="OR"
@@ -165,6 +154,17 @@
             android:orientation="horizontal"
 
             >
+
+            <TextView
+                android:id="@+id/registertxt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="onRegisterClick"
+                android:text="Register"
+                android:textColor="@color/prim"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
