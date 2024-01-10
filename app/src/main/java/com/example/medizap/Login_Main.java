@@ -26,13 +26,13 @@ public class Login_Main extends AppCompatActivity {
     EditText Email,Pswd,Name;
     Button login;
     private String extractUsername(String email) {
-        // Use substring to get the part before @gmail.com
+        // Use substring to get the part before @
         int atIndex = email.indexOf("@");
 
         if (atIndex != -1) {
             return email.substring(0, atIndex);
         } else {
-            // Handle the case where the email doesn't contain @gmail.com
+            // Handle the case where the email doesn't contain @
             return email;
         }
     }
@@ -74,7 +74,6 @@ public class Login_Main extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
-                                // Your user login logic here
                                 String passfromdb = snapshot.child(uniqueUsername).child("pswd").getValue(String.class);
                                 if (passfromdb.equals(pswd)) {
                                     Toast.makeText(Login_Main.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
