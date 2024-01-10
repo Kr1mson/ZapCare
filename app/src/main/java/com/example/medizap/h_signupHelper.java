@@ -1,15 +1,16 @@
 package com.example.medizap;
 
 public class h_signupHelper {
-    String name, email, pswd;
+    String name, email, pswd, username;
 
     public h_signupHelper() {
     }
 
-    public h_signupHelper(String name, String email, String pswd) {
+    public h_signupHelper(String name, String email, String pswd,String username) {
         this.name = name;
         this.email = email;
         this.pswd = pswd;
+        this.username = username;
     }
 
     public String getName() {
@@ -34,5 +35,13 @@ public class h_signupHelper {
 
     public void setPswd(String pswd) {
         this.pswd = pswd;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

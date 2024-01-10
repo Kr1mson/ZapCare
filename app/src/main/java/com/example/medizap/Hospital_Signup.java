@@ -30,7 +30,6 @@ public class Hospital_Signup extends AppCompatActivity {
         Repswd = findViewById(R.id.repswd_edtxt);
         create = findViewById(R.id.create_account_btn);
 
-
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +45,7 @@ public class Hospital_Signup extends AppCompatActivity {
                     if(pswd.length()==8) {
                         if (pswd.equals(repswd)) {
                             DatabaseReference h_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Hospital_Users");
-                            h_signupHelper helper = new h_signupHelper(name, email, pswd);
+                            h_signupHelper helper = new h_signupHelper(name, email, pswd,uniqueUsername);
                             h_ref.child(uniqueUsername).setValue(helper).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -82,5 +81,9 @@ public class Hospital_Signup extends AppCompatActivity {
             // Handle the case where the email doesn't contain @gmail.com
             return email;
         }
+    }
+    public void onLoginClick(View view){
+        Intent i_login = new Intent(getApplicationContext(),Login_Main.class);
+        startActivity(i_login);
     }
 }
