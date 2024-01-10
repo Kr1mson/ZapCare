@@ -152,7 +152,9 @@ public class Map extends Fragment {
                     public boolean onMarkerClick(Marker marker) {
 
                         Toast.makeText(getContext(), "Marker clicked: ", Toast.LENGTH_SHORT).show();
+                        fetchAgencyDetails(marker);
                         return true;
+
 
                     }
                 });
@@ -377,5 +379,37 @@ public class Map extends Fragment {
         Agency_helpline.setText(agency.getH_no());
         Agency_lat.setText(agency.getLatitude());
         Agency_long.setText(agency.getLongitude());
+    }
+    private void fetchAgencyDetails(Marker marker) {
+        // Retrieve agency details from Firebase using the marker's title
+        String agencyName = marker.getTitle();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Agency_Details");
+
+        databaseReference.orderByChild("ag_name").equalTo(agencyName).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Agency_UserHelper agency = snapshot.getValue(Agency_UserHelper.class);
+                        if (agency != null) {
+                            Agency_name.setText(agency.getAg_name());
+                            Agency_helpline.setText(agency.getH_no());
+                            Agency_lat.setText(agency.getLatitude());
+                            Agency_long.setText(agency.getLongitude());
+                            displayAgencyDetails(agency);
+                        }
+                    }
+                } else {
+                    // Agency not found
+                    Toast.makeText(requireContext(), "Agency not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(requireContext(), "Error fetching agency details", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
