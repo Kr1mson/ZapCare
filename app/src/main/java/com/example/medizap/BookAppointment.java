@@ -188,7 +188,7 @@ public class BookAppointment extends Fragment implements Button_Adapter_Date.But
             doctorList = new ArrayList<>();
             doctorsAdapter = new book_doc_adapter(doctorList);
             docrecyclerView.setAdapter(doctorsAdapter);
-            Doctor doctor = new Doctor("name", "hname", "dept", "fee");
+            Doctor doctor = new Doctor("name", "hname", "dept", "fee","btime", "etime");
             doctorList.add(doctor);
         }
 

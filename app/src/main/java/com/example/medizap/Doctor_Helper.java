@@ -1,16 +1,18 @@
 package com.example.medizap;
 
 public class Doctor_Helper {
-    String name, hname, dept, fee;
+    String name, hname, dept, fee,btime,etime;
 
     public Doctor_Helper() {
     }
 
-    public Doctor_Helper(String name, String hname, String dept, String fee) {
+    public Doctor_Helper(String name, String hname, String dept, String fee,String btime, String etime) {
         this.name = name;
         this.hname = hname;
         this.dept = dept;
         this.fee = fee;
+        this.btime = btime;
+        this. etime = etime;
     }
 
     public String getName() {
@@ -43,5 +45,21 @@ public class Doctor_Helper {
 
     public void setFee(String fee) {
         this.fee = fee;
+    }
+
+    public String getBtime() {
+        return btime;
+    }
+
+    public void setBtime(String btime) {
+        this.btime = btime;
+    }
+
+    public String getEtime() {
+        return etime;
+    }
+
+    public void setEtime(String etime) {
+        this.etime = etime;
     }
 }

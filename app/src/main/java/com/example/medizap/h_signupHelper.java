@@ -1,12 +1,12 @@
 package com.example.medizap;
 
-public class User_Helper {
-    String name, email, pswd,username;
+public class h_signupHelper {
+    String name, email, pswd, username;
 
-    public User_Helper() {
+    public h_signupHelper() {
     }
 
-    public User_Helper(String name, String email, String pswd, String username) {
+    public h_signupHelper(String name, String email, String pswd,String username) {
         this.name = name;
         this.email = email;
         this.pswd = pswd;
