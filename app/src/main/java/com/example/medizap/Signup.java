@@ -71,7 +71,7 @@ public class Signup extends AppCompatActivity {
                                     Toast.makeText(Signup.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
                                     SharedPreferences preferences_email = getSharedPreferences("user_credentials", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = preferences_email.edit();
-                                    editor.putString("username", name);
+                                    editor.putString("username", uniqueUsername);
                                     editor.putString("email", email);
                                     editor.putString("pswd", pswd);
                                     editor.apply();

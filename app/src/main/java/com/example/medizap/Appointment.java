@@ -44,7 +44,7 @@ public class Appointment extends Fragment {
         appointmentList = new ArrayList<>();
         appointmentAdapter = new Appointment_Adapter(appointmentList,getContext());
         recyclerViewAppointment.setAdapter(appointmentAdapter);
-        DatabaseReference ap_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Appointments");
+        DatabaseReference ap_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Final appointments");
 
         ap_ref.addValueEventListener(new ValueEventListener() {
             @Override
