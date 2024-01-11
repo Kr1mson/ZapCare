@@ -1,10 +1,10 @@
 package com.example.medizap;
 
 public class Appointment_List {
-    String uname,dname, hname, dept, fee,date,time;
+    String uname,dname, hname, dept, fee,date,time, approval;
     public Appointment_List() {
     };
-    public Appointment_List(String uname, String dname, String hname, String dept, String fee, String date, String time) {
+    public Appointment_List(String uname, String dname, String hname, String dept, String fee, String date, String time,String approval) {
         this.uname = uname;
         this.dname=dname;
         this.hname = hname;
@@ -12,6 +12,7 @@ public class Appointment_List {
         this.fee = fee;
         this.date=date;
         this.time=time;
+        this.approval =approval;
     }
     public String getUName() {
         return uname;
@@ -64,5 +65,13 @@ public class Appointment_List {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getApproval() {
+        return approval;
+    }
+
+    public void setApproval(String approval) {
+        this.approval = approval;
     }
 }

@@ -1,12 +1,12 @@
 package com.example.medizap;
 
 public class Book_Doc_Helper_DB {
-    String uname, dname, hname, dept, fee,date,month;
+    String uname, dname, hname, dept, fee,date,month, approval;
 
     public Book_Doc_Helper_DB() {
     }
 
-    public Book_Doc_Helper_DB(String uname, String dname, String hname, String dept, String fee,String date, String month) {
+    public Book_Doc_Helper_DB(String uname, String dname, String hname, String dept, String fee,String date, String month,String approval) {
         this.uname = uname;
         this.dname = dname;
         this.hname = hname;
@@ -14,6 +14,7 @@ public class Book_Doc_Helper_DB {
         this.fee = fee;
         this.date = date;
         this.month = month;
+        this.approval = approval;
     }
 
     public String getUname() {
@@ -73,4 +74,11 @@ public class Book_Doc_Helper_DB {
         this.month = month;
     }
 
+    public String getApproval() {
+        return approval;
+    }
+
+    public void setApproval(String approval) {
+        this.approval = approval;
+    }
 }

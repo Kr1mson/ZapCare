@@ -36,8 +36,12 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
     }
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, hospitalTextView, specializationTextView, feeTextView,waitTextView;
-        String name, hospital,fee, dept, wait;
+        String name, hospital,fee, dept;
         Button schedule;
+        private static String removeDrAndExtraSpace(String input) {
+            // Replace "Dr." with an empty string and trim leading/trailing spaces
+            return input.replace("Dr.", "").trim();
+        }
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -65,15 +69,18 @@ public class book_doc_adapter extends RecyclerView.Adapter<book_doc_adapter.View
                                 hospital = hospitalTextView.getText().toString();
                                 dept = specializationTextView.getText().toString();
                                 fee = feeTextView.getText().toString();
+                                String d_name = removeDrAndExtraSpace(name);
+                                String approval = "pending";
                                 String date = Date.toString();
                                 String month = selectedMonth.toString();
+                                String ref = patient_name+d_name+date;
                                 if(name.equals("")||hospital.equals("")||dept.equals("")||fee.equals("")||date.equals("")||month.equals("")){
                                     Toast.makeText(itemView.getContext(), "There was a problem scheduling an appointment", Toast.LENGTH_SHORT).show();
                                 }
                                 else{
-                                    Book_Doc_Helper_DB bookDocHelperDb = new Book_Doc_Helper_DB(patient_name,name,hospital,dept,fee,date,month);
+                                    Book_Doc_Helper_DB bookDocHelperDb = new Book_Doc_Helper_DB(patient_name,name,hospital,dept,fee,date,month,approval);
                                     DatabaseReference appointment_ref= FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Appointments");
-                                    appointment_ref.child(patient_name).setValue(bookDocHelperDb).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    appointment_ref.child(ref).setValue(bookDocHelperDb).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(itemView.getContext(), "New appointment Requested", Toast.LENGTH_SHORT).show();

@@ -25,7 +25,7 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView unameTextView, dnameTextView, hospitalTextView, specializationTextView, feeTextView, dateTextView, timeTextView;
+        TextView unameTextView, dnameTextView, hospitalTextView, specializationTextView, feeTextView, dateTextView, timeTextView,waitTextview;
         ImageView cancel;
         GestureDetector gestureDetector;
 
@@ -38,6 +38,7 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
             feeTextView = itemView.findViewById(R.id.feeTextView);
             dateTextView = itemView.findViewById(R.id.dateTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
+            waitTextview = itemView.findViewById(R.id.waitView);
             cancel = itemView.findViewById(R.id.cancel);
 
             gestureDetector = new GestureDetector(itemView.getContext(), new GestureListener());
@@ -67,9 +68,10 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
         holder.dnameTextView.setText(appointment.getDName());
         holder.hospitalTextView.setText(appointment.getHname());
         holder.specializationTextView.setText(appointment.getDept());
-        holder.feeTextView.setText("$" + appointment.getFee() + " per session");
+        holder.feeTextView.setText(appointment.getFee());
         holder.dateTextView.setText(appointment.getDate());
         holder.timeTextView.setText(appointment.getTime());
+        holder.waitTextview.setText("Status: "+appointment.getApproval());
     }
 
     @Override
@@ -81,7 +83,7 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
         @Override
         public boolean onSingleTapUp(MotionEvent e) {
             // Handle single tap
-            Toast.makeText(context, "Hold to Delete", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Hold to Cancel", Toast.LENGTH_SHORT).show();
             // Change the text or perform any action for a single tap
             // imageView.setText("Single Tap Text");
             return true;
@@ -90,9 +92,8 @@ public class Appointment_Adapter extends RecyclerView.Adapter<Appointment_Adapte
         @Override
         public void onLongPress(MotionEvent e) {
             // Handle long press
-            Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
-            // Change the text or perform any action for a long press
-            // imageView.setText("Long Press Text");
+            Toast.makeText(context, "appointment cancelled", Toast.LENGTH_SHORT).show();
+
         }
     }
 }
