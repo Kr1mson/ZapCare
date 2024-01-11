@@ -145,4 +145,8 @@ public class Login_Main extends AppCompatActivity {
         Intent i_register=new Intent(getApplicationContext(),Hospital_Signup.class);
         startActivity(i_register);
     }
+    public void onHospiClick(View view) {
+        Intent i_signup=new Intent(getApplicationContext(),Hospital_Home.class);
+        startActivity(i_signup);
+    }
 }
