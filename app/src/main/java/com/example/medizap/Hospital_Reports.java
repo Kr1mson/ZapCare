@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class Hospital_Maps extends Fragment {
-    public Hospital_Maps(){}
+public class Hospital_Reports extends Fragment {
+    public Hospital_Reports(){}
     View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
