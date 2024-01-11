@@ -18,10 +18,16 @@ import java.util.List;
 
 public class Pending_Adapter extends RecyclerView.Adapter<Pending_Adapter.ViewHolder> {
     private List<Pending_list> pending_lists;
+    private ApprovalListener approvalListener;
+    public interface ApprovalListener {
+        void onApproveClicked(Pending_list pendingItem);
+        void onRejectClicked(Pending_list pendingItem);
+    }
 
 
-    public Pending_Adapter(List<Pending_list> pending_lists) {
+    public Pending_Adapter(List<Pending_list> pending_lists,ApprovalListener approvalListener) {
         this.pending_lists = pending_lists;
+        this.approvalListener = approvalListener;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -37,10 +43,6 @@ public class Pending_Adapter extends RecyclerView.Adapter<Pending_Adapter.ViewHo
             Approve = itemView.findViewById(R.id.approve);
             Reject = itemView.findViewById(R.id.reject);
 
-
-
-            // Initialize your buttons here
-
         }
     }
 
@@ -53,12 +55,13 @@ public class Pending_Adapter extends RecyclerView.Adapter<Pending_Adapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull Pending_Adapter.ViewHolder holder, int position) {
+        
         Pending_list pending = pending_lists.get(position);
         holder.unameTextView.setText(pending.getUname());
         holder.dnameTextView.setText(pending.getDname());
         holder.dateTextView.setText("Date: "+pending.getDate());
         holder.monthTextView.setText("Month: "+pending.getMonth());
-        String dname = pending.getDname().toString();
+        String dname = pending.getDname();
         String date_ = pending.getDate().toString();
         String doctor = removeDrAndExtraSpace(dname);
         DatabaseReference ap_ref = FirebaseDatabase.getInstance("https://medizap-a8ae7-default-rtdb.firebaseio.com/").getReference("Appointments");
@@ -68,14 +71,16 @@ public class Pending_Adapter extends RecyclerView.Adapter<Pending_Adapter.ViewHo
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Approved", Toast.LENGTH_SHORT).show();
-                ap_ref.child(Login_Main.sharedname+doctor+date_).child("approval").setValue("Approved");
+                //ap_ref.child(Login_Main.sharedname+doctor+date_).child("approval").setValue("Approved");
+                approvalListener.onApproveClicked(pending);
             }
         });
         holder.Reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "Rejected", Toast.LENGTH_SHORT).show();
-                ap_ref.child(Login_Main.sharedname+doctor+date_).child("approval").setValue("Rejected");
+                //ap_ref.child(Login_Main.sharedname+doctor+date_).child("approval").setValue("Rejected");
+                approvalListener.onRejectClicked(pending);
 
             }
         });
